@@ -4,6 +4,8 @@
 #
 include_recipe "homebrew"
 
+include_recipe "megalodon::taps"
+
 directory "#{ENV['HOME']}/.megalodon" do
   action :create
 end
