@@ -5,11 +5,7 @@
   "json_class": "Chef::Role",
   "run_list": [
     "recipe[mysql::mariadb]",
-    "recipe[php]",
-    "recipe[php::module_apc]",
-    "recipe[php::module_memcached]",
-    "recipe[php::module_xdebug]",
-    "recipe[xhprof]",
+    "recipe[megalodon::php]",
     "recipe[megalodon::apache_vhosts]"
   ],
   "description": "",
