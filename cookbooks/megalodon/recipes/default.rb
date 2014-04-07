@@ -49,10 +49,3 @@ execute "setup megalodon profile sourcing in ~/.profile" do
 end
 
 package "git"
-script "updating homebrew from github" do
-  interpreter "bash"
-  code <<-EOS
-    source ~/.megalodon.profile
-    /usr/local/bin/brew update >> ~/.megalodon/brew.log 2>&1
-  EOS
-end
