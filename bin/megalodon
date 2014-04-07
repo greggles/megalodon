@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
+$:.unshift(File.expand_path(File.join(File.dirname(__FILE__), "..", "lib")))
 require "rubygems"
 require 'optparse'
 require 'fileutils'
+require "megalodon"
 
 # Cross-platform way of finding an executable in the $PATH. (stolen from hub)
 #
@@ -50,6 +52,10 @@ opt_parser.parse!
 case ARGV[0]
   when 'update_vhosts'
     runlist = 'run_vhosts.json'
+  when 'php-switch'
+    Megalodon.php_switch ARGV[1]
+    # TODO: Create a smaller run list for this.
+    runlist = 'run_list.json'
   when 'install', nil
     runlist = 'run_list.json'
   else
@@ -73,4 +79,4 @@ end
 puts "Copying custom forumulas"
 system("cp #{megalodon_path}/formulas/* /usr/local/Library/Formula/")
 puts "Starting chef-solo run"
-system("#{chef_solo} -j #{megalodon_path}/config/#{runlist} -c #{megalodon_path}/config/solo.rb")
+system({"GEM_HOME" => nil}, "#{chef_solo} -j #{megalodon_path}/config/#{runlist} -c #{megalodon_path}/config/solo.rb")
